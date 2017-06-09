@@ -894,7 +894,7 @@
             "[concat(parameters('artifactBaseUri'), 'postjoin-worker.ps1')]",
             "[concat(parameters('artifactBaseUri'), 'configure-worker.ps1')]"
           ],
-          "commandToExecute": "[concat('powershell.exe -ExecutionPolicy Unrestricted -File configure-worker.ps1 -DockerVersion ', parameters('dockerVersion'), ' -DTRFQDN ', variables('manager_sub0').dtrHostname)]"
+          "commandToExecute": "[concat('powershell.exe -ExecutionPolicy Unrestricted -File configure-worker.ps1 -DockerVersion ', parameters('dockerVersion'), ' -HubPassword ', parameters('hubPassword'), ' -HubUsername ', parameters('hubUsername'), ' -UcpVersion ', parameters('ucpVersion'), ' -DTRFQDN ', variables('manager_sub0').dtrHostname)]"
         }
       }
     }

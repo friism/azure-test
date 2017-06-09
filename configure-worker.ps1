@@ -1,9 +1,11 @@
 [CmdletBinding()]
 Param(
   [switch] $SkipEngineUpgrade,
-  [string] $ArtifactPath = ".",
   [string] $DockerVersion = "17.06.0-ce-rc2",
-  [string] $DTRFQDN
+  [string] $DTRFQDN,
+  [string] $HubUsername,
+  [string] $HubPassword,
+  [string] $UcpVersion
 )
 
 #Variables
@@ -17,17 +19,15 @@ function Disable-RealTimeMonitoring () {
 
 function Install-LatestDockerEngine () {
     #Get Docker Engine from Master Builds
-    if ((-not (Test-Path (Join-Path $ArtifactPath "docker.exe"))) -and (-not (Test-Path (Join-Path $ArtifactPath "dockerd.exe")))) {
-        Invoke-WebRequest -Uri "https://download.docker.com/win/static/test/x86_64/docker-$DockerVersion-x86_64.zip" -OutFile (Join-Path $ArtifactPath "docker.zip")
-    }
+    Invoke-WebRequest -Uri "https://download.docker.com/win/static/test/x86_64/docker-$DockerVersion-x86_64.zip" -OutFile "docker.zip"
 
     #Get Docker Engine
-    Expand-Archive -Path (Join-Path $ArtifactPath "docker.zip") -DestinationPath "$ArtifactPath" -Force
+    Expand-Archive -Path "docker.zip" -DestinationPath . -Force
 
     #Replace Docker Engine
     Stop-Service docker
-    Copy-Item "$ArtifactPath\docker\dockerd.exe" "$DockerPath\dockerd.exe" -Force
-    Copy-Item "$ArtifactPath\docker\docker.exe" "$DockerPath\docker.exe" -Force
+    Copy-Item ".\docker\dockerd.exe" "$DockerPath\dockerd.exe" -Force
+    Copy-Item ".\docker\docker.exe" "$DockerPath\docker.exe" -Force
     Start-Service docker
 }
 
@@ -52,6 +52,12 @@ function Enable-RemotePowershell () {
 
 function Set-DtrHostnameEnvironmentVariable() {
     $DTRFQDN | Out-File (Join-Path $DockerDataPath "dtr_fqdn")
+}
+
+function Fetch-UcpImages() {
+    docker login -p $HubPassword -u $HubUsername
+    docker pull dockerorcadev/ucp-dsinfo-win:$UcpVersion
+    docker pull dockerorcadev/ucp-agent-win:$UcpVersion
 }
 
 #Start Script
