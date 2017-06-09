@@ -56,7 +56,7 @@ function Set-DtrHostnameEnvironmentVariable() {
 
 #Start Script
 $ErrorActionPreference = "Stop"
-$ProgressPreference = 'SilentlyContinue'
+$ProgressPreference = "SilentlyContinue"
 
 try
 {

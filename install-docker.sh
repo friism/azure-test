@@ -1,9 +1,8 @@
 #!/bin/bash
 sudo apt-get update
-sudo apt-get install \
+sudo apt-get install -y --no-install-recommends \
     linux-image-extra-$(uname -r) \
-    linux-image-extra-virtual
-sudo apt-get install \
+    linux-image-extra-virtual \
     apt-transport-https \
     ca-certificates \
     curl \
@@ -14,4 +13,4 @@ sudo add-apt-repository \
    $(lsb_release -cs) \
    test"
 sudo apt-get update
-sudo apt-get install docker-ce
+sudo apt-get install -y docker-ce=$DOCKER_VERSION
