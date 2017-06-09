@@ -2,7 +2,7 @@
 Param(
   [switch] $SkipEngineUpgrade,
   [string] $ArtifactPath = ".",
-  [string] $DockerVersion = "17.05.0-ce-rc3",
+  [string] $DockerVersion = "17.06.0-ce-rc2",
   [string] $DTRFQDN
 )
 
@@ -18,11 +18,11 @@ function Disable-RealTimeMonitoring () {
 function Install-LatestDockerEngine () {
     #Get Docker Engine from Master Builds
     if ((-not (Test-Path (Join-Path $ArtifactPath "docker.exe"))) -and (-not (Test-Path (Join-Path $ArtifactPath "dockerd.exe")))) {
-        Invoke-WebRequest -Uri "https://test.docker.com/builds/Windows/x86_64/docker-$DockerVersion.zip" -OutFile (Join-Path $ArtifactPath "docker-$DockerVersion.zip")
+        Invoke-WebRequest -Uri "https://download.docker.com/win/static/test/x86_64/docker-$DockerVersion-x86_64.zip" -OutFile (Join-Path $ArtifactPath "docker.zip")
     }
 
     #Get Docker Engine
-    Expand-Archive -Path (Join-Path $ArtifactPath "docker-$DockerVersion.zip") -DestinationPath "$ArtifactPath" -Force
+    Expand-Archive -Path (Join-Path $ArtifactPath "docker.zip") -DestinationPath "$ArtifactPath" -Force
 
     #Replace Docker Engine
     Stop-Service docker
@@ -54,14 +54,10 @@ function Set-DtrHostnameEnvironmentVariable() {
     $DTRFQDN | Out-File (Join-Path $DockerDataPath "dtr_fqdn")
 }
 
-function Install-WindowsUpdates() {
-    Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
-    Install-Module PSWindowsUpdate -Force
-    Get-WUInstall -WindowsUpdate -KBArticleID KB4015217 -AcceptAll -AutoReboot
-}
-
 #Start Script
 $ErrorActionPreference = "Stop"
+$ProgressPreference = 'SilentlyContinue'
+
 try
 {
     Start-Transcript -path "C:\ProgramData\Docker\configure-worker $Date.log" -append
@@ -82,9 +78,6 @@ try
 
     Write-Host "Set DTR FQDN Environment Variable"
     Set-DtrHostnameEnvironmentVariable
-
-    Write-Host "Install Overlay Package"
-    Install-WindowsUpdates
 
     Write-Host "Restarting machine"
     Stop-Transcript

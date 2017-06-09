@@ -32,6 +32,8 @@ function Start-Docker() {
 
 #Start Script
 $ErrorActionPreference = "Stop"
+$ProgressPreference = 'SilentlyContinue'
+
 try 
 {
     Write-Host "Checking UCP Cert path"

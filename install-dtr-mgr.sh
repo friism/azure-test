@@ -23,7 +23,7 @@ sudo service docker start
 
 #install DTR
 docker run --rm \
-  docker/dtr:2.2.4 install \
+  docker/dtr:$DTR_VERSION install \
   --ucp-url $UCP_PUBLIC_FQDN \
   --ucp-node $UCP_NODE \
   --dtr-external-url $DTR_PUBLIC_FQDN \
