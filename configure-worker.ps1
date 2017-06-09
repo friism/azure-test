@@ -21,7 +21,7 @@ function Install-LatestDockerEngine () {
     Invoke-WebRequest -Uri "https://download.docker.com/win/static/test/x86_64/docker-$DockerVersion-x86_64.zip" -OutFile "docker.zip"
 
     Stop-Service docker
-    Remove-Item -f -Recurse $env:ProgramFiles\docker
+    Remove-Item -Force -Recurse $env:ProgramFiles\docker
     Expand-Archive -Path "docker.zip" -DestinationPath $env:ProgramFiles -Force
     Remove-Item docker.zip
 
