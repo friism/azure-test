@@ -110,7 +110,7 @@
     },
     "artifactBaseUri": {
       "type": "string",
-      "defaultValue": "https://mtapoc.blob.core.windows.net/v203/" 
+      "defaultValue": "https://raw.githubusercontent.com/friism/azure-test/master/" 
     }
   },
   "variables": {
