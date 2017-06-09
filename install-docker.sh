@@ -13,4 +13,4 @@ sudo add-apt-repository \
    $(lsb_release -cs) \
    test"
 sudo apt-get update
-sudo apt-get install -y docker-ce=$DOCKER_VERSION
+sudo apt-get install -y docker-ce
