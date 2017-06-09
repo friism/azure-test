@@ -38,7 +38,6 @@ function Disable-Firewall () {
     if ($data -Match "ON"){
         Set-NetFirewallProfile -Profile Public -Enabled False
     }
-
 }
 
 function Enable-RemotePowershell () {
@@ -55,6 +54,10 @@ function Fetch-UcpImages() {
     docker login -p $HubPassword -u $HubUsername
     docker pull dockerorcadev/ucp-dsinfo-win:$UcpVersion
     docker pull dockerorcadev/ucp-agent-win:$UcpVersion
+
+    Add-Content setup.ps1 $(docker run --rm dockerorcadev/ucp-agent-win:$UcpVersion windows-script --image-version dev:)
+    & .\setup.ps1
+    Remote-Item -Force setup.ps1
 }
 
 #Start Script
