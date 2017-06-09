@@ -21,13 +21,11 @@ function Install-LatestDockerEngine () {
     #Get Docker Engine from Master Builds
     Invoke-WebRequest -Uri "https://download.docker.com/win/static/test/x86_64/docker-$DockerVersion-x86_64.zip" -OutFile "docker.zip"
 
-    #Get Docker Engine
-    Expand-Archive -Path "docker.zip" -DestinationPath . -Force
-
-    #Replace Docker Engine
     Stop-Service docker
-    Copy-Item ".\docker\dockerd.exe" "$DockerPath\dockerd.exe" -Force
-    Copy-Item ".\docker\docker.exe" "$DockerPath\docker.exe" -Force
+    Remove-Item -f -Recurse $env:ProgramFiles\docker
+    Expand-Archive -Path "docker.zip" -DestinationPath $env:ProgramFiles -Force
+    Remove-Item docker.zip
+
     Start-Service docker
 }
 
