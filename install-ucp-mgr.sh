@@ -14,6 +14,8 @@ echo "UCP_PUBLIC_FQDN=$UCP_PUBLIC_FQDN"
 #start docker service
 sudo service docker start
 
+docker login -p $HUB_PASSWORD -u $HUB_USERNAME
+
 #install UCP
 docker run --rm --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
