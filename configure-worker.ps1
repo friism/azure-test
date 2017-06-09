@@ -10,7 +10,6 @@ Param(
 
 #Variables
 $Date = Get-Date -Format "yyyy-MM-dd HHmmss"
-$DockerPath = "C:\Program Files\Docker"
 $DockerDataPath = "C:\ProgramData\Docker"
 
 function Disable-RealTimeMonitoring () {
