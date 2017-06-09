@@ -17,7 +17,8 @@ sudo service docker start
 docker login -p $HUB_PASSWORD -u $HUB_USERNAME
 
 #install UCP
+docker run dockerorcadev/ucp:$UCP_VERSION images --list --image-version dev: | xargs -L 1 docker pull
 docker run --rm --name ucp \
   -v /var/run/docker.sock:/var/run/docker.sock \
    dockerorcadev/ucp:$UCP_VERSION \
-   install --enable-windows --san $UCP_PUBLIC_FQDN --admin-password $UCP_ADMIN_PASSWORD --debug
+   install --san $UCP_PUBLIC_FQDN --admin-password $UCP_ADMIN_PASSWORD --debug
