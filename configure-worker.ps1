@@ -44,7 +44,7 @@ function Set-DtrHostnameEnvironmentVariable() {
     $DTRFQDN | Out-File (Join-Path $DockerDataPath "dtr_fqdn")
 }
 
-function Fetch-UcpImages() {
+function Get-UcpImages() {
     docker login -p $HubPassword -u $HubUsername
     docker pull dockerorcadev/ucp-dsinfo-win:$UcpVersion
     docker pull dockerorcadev/ucp-agent-win:$UcpVersion
