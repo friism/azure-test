@@ -79,7 +79,6 @@ try
     Write-Host "Set DTR FQDN Environment Variable"
     Set-DtrHostnameEnvironmentVariable
 
-    Write-Host "Restarting machine"
     Stop-Transcript
 }
 catch
