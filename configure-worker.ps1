@@ -40,12 +40,6 @@ function Disable-Firewall () {
     }
 }
 
-function Enable-RemotePowershell () {
-    #Enable remote powershell for remote management
-    Enable-PSRemoting -Force
-    Set-Item wsman:\localhost\client\trustedhosts * -Force
-}
-
 function Set-DtrHostnameEnvironmentVariable() {
     $DTRFQDN | Out-File (Join-Path $DockerDataPath "dtr_fqdn")
 }
@@ -76,11 +70,11 @@ try
         Install-LatestDockerEngine
     }
 
+    Write-Host "Getting UCP Images"
+    Get-UcpImages
+
     Write-Host "Disabling Firewall"
     Disable-Firewall
-
-    Write-Host "Enabling Remote Powershell"
-    Enable-RemotePowershell
 
     Write-Host "Set DTR FQDN Environment Variable"
     Set-DtrHostnameEnvironmentVariable
