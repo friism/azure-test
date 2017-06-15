@@ -1,7 +1,7 @@
 [CmdletBinding()]
 Param(
   [switch] $SkipEngineUpgrade,
-  [string] $DockerVersion = "17.06.0-ce-rc2",
+  [string] $DockerVersion,
   [string] $DTRFQDN,
   [string] $HubUsername,
   [string] $HubPassword,
@@ -20,7 +20,7 @@ function Disable-RealTimeMonitoring () {
 
 function Install-LatestDockerEngine () {
     #Get Docker Engine from Master Builds
-    Invoke-WebRequest -Uri "https://download.docker.com/win/static/test/x86_64/docker-$DockerVersion-x86_64.zip" -OutFile "docker.zip"
+    Invoke-WebRequest -Uri "https://download.docker.com/win/static/test/x86_64/docker-$DockerVersion.zip" -OutFile "docker.zip"
 
     Stop-Service docker
     Remove-Item -Force -Recurse $env:ProgramFiles\docker
