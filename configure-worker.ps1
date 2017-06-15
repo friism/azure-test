@@ -14,6 +14,8 @@ $DockerDataPath = "C:\ProgramData\Docker"
 
 function Disable-RealTimeMonitoring () {
     Set-MpPreference -DisableRealtimeMonitoring $true
+    reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update" /v AUOptions /t REG_DWORD /d 1 /f
+    reg add "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v NoAutoUpdate /t REG_DWORD /d 1 /f
 }
 
 function Install-LatestDockerEngine () {
