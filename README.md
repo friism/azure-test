@@ -18,9 +18,9 @@ $resource_group_name="<some-resource-group-you-pre-created>"
 $adminPassword="<some-pw-with-special-char-and-capital-letters>"
 $sshPublicKey="<your-pup-key>"
 $prefix="<some-prefix-less-than-7-chars>"
-$ucpVersion="2.2.0-20c177f"
-$dtrVersion="2.2.5"
-$dockerVersion="17.06.0-ce-rc2"
+$ucpVersion="2.2.0-c1c0454"
+$dtrVersion="2.3.0-tp5"
+$dockerVersion="17.06.0-ce-rc4"
 $workerCount=1
 $hubUsername="<your-hub-username>"
 $hubPassword="<your-hub-password>"
@@ -31,7 +31,6 @@ New-AzureRmResourceGroupDeployment -ResourceGroupName $resource_group_name `
   -TemplateUri 'https://raw.githubusercontent.com/friism/azure-test/master/azuredeploy.json' `
   -TemplateParameterObject $parameters `
   -Verbose
-
 ```
 
 ## Setup
