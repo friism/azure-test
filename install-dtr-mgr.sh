@@ -25,7 +25,7 @@ docker login -p $HUB_PASSWORD -u $HUB_USERNAME
 
 #install DTR
 docker run --rm \
-  docker pull dockerhubenterprise/dtr:$DTR_VERSION install \
+  dockerhubenterprise/dtr:$DTR_VERSION install \
   --ucp-url $UCP_PUBLIC_FQDN \
   --ucp-node $UCP_NODE \
   --dtr-external-url $DTR_PUBLIC_FQDN \
