@@ -10,7 +10,7 @@ param(
 
     [string]$ucpVersion='latest',
     [string]$dtrVersion='2.3.0-tp6',
-    [string]$dockerVersion='17.06.0-ce',
+    [string]$dockerVersion='17.06.0',
     [string]$vmSize='Standard_D2_v2',
     [string]$storageAccountType='Standard_LRS',
     [int]$workerCount=1
