@@ -7,31 +7,23 @@ Brandon Royal
 ## Installation with PowerShell
 
 ```
-Login-AzureRmAccount
-
 git clone https://github.com/friism/azure-test
 
 cd azure-test
 
-$resource_group_name="<some-resource-group-you-pre-created>"
+Login-AzureRmAccount
 
-$adminPassword="<some-pw-with-special-char-and-capital-letters>"
-$sshPublicKey="<your-pup-key>"
-$prefix="<some-prefix-less-than-7-chars>"
-$ucpVersion="latest"
-$dtrVersion="2.3.0-tp6"
-$dockerVersion="17.06.0-ce"
-$workerCount=1
-$hubUsername="<your-hub-username>"
-$hubPassword="<your-hub-password>"
-
-$parameters = @{ 'hubUsername'= $hubUsername; 'hubPassword' = $hubPassword; 'workerCount' = $workerCount; 'prefix' = $prefix; 'adminUsername' = "docker"; 'adminPassword' = $adminPassword; 'sshPublicKey' = $sshPublicKey; 'ucpVersion' = $ucpVersion; 'dtrVersion' = $dtrVersion; 'dockerVersion' = $dockerVersion }
-
-New-AzureRmResourceGroupDeployment -ResourceGroupName $resource_group_name `
-  -TemplateUri 'https://raw.githubusercontent.com/friism/azure-test/master/azuredeploy.json' `
-  -TemplateParameterObject $parameters `
-  -Verbose
+.\deploy.ps1
 ```
+
+This is an interactive script. You will be prompted for:
+
+- the Azure region where resources will be created
+- the resource group name (RG will be created if it does not exist)
+- the prefix to use for resource names
+- your SSH public key for remote access to Linux nodes
+- administrator credentials to set
+- your Docker Hub credentials
 
 ## Setup
 
