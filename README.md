@@ -1,6 +1,6 @@
 # Credits
 
-Brandon Royal
+Brandon Royal, 
 Michael Friis
 
 # Instructions
