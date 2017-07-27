@@ -13,4 +13,4 @@ sudo add-apt-repository \
    $(lsb_release -cs) \
    test"
 sudo apt-get update
-sudo apt-get install -y docker-ce=17.06.0~ce-0~ubuntu
+sudo apt-get install -y docker-ce=$DOCKER_VERSION-0~ce-0~ubuntu
