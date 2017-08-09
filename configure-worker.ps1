@@ -19,8 +19,8 @@ function Disable-RealTimeMonitoring () {
 }
 
 function Install-LatestDockerEngine () {
-    #Get Docker Engine from Master Builds
-    Invoke-WebRequest -Uri "https://download.docker.com/win/static/test/x86_64/docker-$DockerVersion.zip" -OutFile "docker.zip"
+    $dockerMajorMinorVersion = $DockerVersion.Substring(0, 5)
+    Invoke-WebRequest -Uri "https://download.docker.com/components/engine/windows-server/$dockerMajorMinorVersion/docker-$DockerVersion.zip" -OutFile "docker.zip"
 
     Stop-Service docker
     Remove-Item -Force -Recurse $env:ProgramFiles\docker
