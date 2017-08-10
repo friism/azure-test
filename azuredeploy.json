@@ -68,6 +68,12 @@
         "description": "Docker Version"
       }
     },
+    "dockerLinuxVersion": {
+      "type": "string",
+      "metadata": {
+        "description": "Docker Version"
+      }
+    },
     "adminPassword": {
       "type": "securestring",
       "metadata": {
@@ -865,7 +871,7 @@
               "[concat(parameters('artifactBaseUri'), 'install-ucp-mgr.sh')]",
               "[concat(parameters('artifactBaseUri'), 'install-dtr-mgr.sh')]"
             ],
-            "commandToExecute": "[concat('export UCP_PUBLIC_FQDN=', variables('manager_sub0').ucpHostname, '; export DTR_PUBLIC_FQDN=', variables('manager_sub0').dtrHostname, '; export UCP_ADMIN_PASSWORD=', parameters('adminPassword'), '; export UCP_VERSION=', parameters('ucpVersion'), '; export DTR_VERSION=', parameters('dtrVersion'), '; export DOCKER_VERSION=', parameters('dockerVersion'), '; export HUB_PASSWORD=', parameters('hubPassword'), '; export HUB_USERNAME=', parameters('hubUsername'), '; ./install-docker.sh; ./install-ucp-mgr.sh; ./install-dtr-mgr.sh;')]"
+            "commandToExecute": "[concat('export UCP_PUBLIC_FQDN=', variables('manager_sub0').ucpHostname, '; export DTR_PUBLIC_FQDN=', variables('manager_sub0').dtrHostname, '; export UCP_ADMIN_PASSWORD=', parameters('adminPassword'), '; export UCP_VERSION=', parameters('ucpVersion'), '; export DTR_VERSION=', parameters('dtrVersion'), '; export DOCKER_VERSION=', parameters('dockerVersion'), '; export DOCKER_LINUX_VERSION=', parameters('dockerLinuxVersion'), '; export HUB_PASSWORD=', parameters('hubPassword'), '; export HUB_USERNAME=', parameters('hubUsername'), '; ./install-docker.sh; ./install-ucp-mgr.sh; ./install-dtr-mgr.sh;')]"
           }
         }
     },
