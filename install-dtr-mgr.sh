@@ -21,17 +21,13 @@ fi
 #start docker service
 sudo service docker start
 
-docker login -p $HUB_PASSWORD -u $HUB_USERNAME
-
 #install DTR
 docker run --rm \
-  dockerhubenterprise/dtr:$DTR_VERSION install \
+  docker/dtr:$DTR_VERSION install \
   --ucp-url $UCP_PUBLIC_FQDN \
   --ucp-node $UCP_NODE \
   --dtr-external-url $DTR_PUBLIC_FQDN \
   --ucp-username admin --ucp-password $UCP_ADMIN_PASSWORD \
   --ucp-insecure-tls \
   --replica-http-port 8081 \
-  --replica-https-port 8443 \
-  --hub-username $HUB_USERNAME \
-  --hub-password $HUB_PASSWORD
+  --replica-https-port 8443
