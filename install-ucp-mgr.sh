@@ -14,12 +14,10 @@ echo "UCP_PUBLIC_FQDN=$UCP_PUBLIC_FQDN"
 #start docker service
 sudo service docker start
 
-docker login -p $HUB_PASSWORD -u $HUB_USERNAME
-
 #install UCP
-docker run dockerorcadev/ucp:$UCP_VERSION images --list --image-version dev: | xargs -L 1 docker pull
+docker run docker/ucp:$UCP_VERSION images --list --image-version dev: | xargs -L 1 docker pull
 docker run --rm --name ucp \
   -e REGISTRY_USERNAME=$HUB_USERNAME -e REGISTRY_PASSWORD=$HUB_PASSWORD \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  dockerorcadev/ucp:$UCP_VERSION \
+  docker/ucp:$UCP_VERSION \
   install --san $UCP_PUBLIC_FQDN --admin-password $UCP_ADMIN_PASSWORD --debug --image-version dev:

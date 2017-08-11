@@ -22,10 +22,8 @@ $ucpVersion="latest"
 $dtrVersion="2.3.0-tp6"
 $dockerVersion="17.06.0-ce"
 $workerCount=1
-$hubUsername="<your-hub-username>"
-$hubPassword="<your-hub-password>"
 
-$parameters = @{ 'hubUsername'= $hubUsername; 'hubPassword' = $hubPassword; 'workerCount' = $workerCount; 'prefix' = $prefix; 'adminUsername' = "docker"; 'adminPassword' = $adminPassword; 'sshPublicKey' = $sshPublicKey; 'ucpVersion' = $ucpVersion; 'dtrVersion' = $dtrVersion; 'dockerVersion' = $dockerVersion }
+$parameters = @{ 'workerCount' = $workerCount; 'prefix' = $prefix; 'adminUsername' = "docker"; 'adminPassword' = $adminPassword; 'sshPublicKey' = $sshPublicKey; 'ucpVersion' = $ucpVersion; 'dtrVersion' = $dtrVersion; 'dockerVersion' = $dockerVersion }
 
 New-AzureRmResourceGroupDeployment -ResourceGroupName $resource_group_name `
   -TemplateUri 'https://raw.githubusercontent.com/friism/azure-test/master/azuredeploy.json' `

@@ -32,18 +32,6 @@
       "minLength": 3,
       "maxLength": 7
     },
-    "hubUsername": {
-      "type": "string",
-      "metadata": {
-        "description": "Hub username"
-      }
-    },
-    "hubPassword": {
-      "type": "string",
-      "metadata": {
-        "description": "Hub password"
-      }
-    },
     "adminUsername": {
       "type": "string",
       "metadata": {
@@ -871,7 +859,7 @@
               "[concat(parameters('artifactBaseUri'), 'install-ucp-mgr.sh')]",
               "[concat(parameters('artifactBaseUri'), 'install-dtr-mgr.sh')]"
             ],
-            "commandToExecute": "[concat('export UCP_PUBLIC_FQDN=', variables('manager_sub0').ucpHostname, '; export DTR_PUBLIC_FQDN=', variables('manager_sub0').dtrHostname, '; export UCP_ADMIN_PASSWORD=', parameters('adminPassword'), '; export UCP_VERSION=', parameters('ucpVersion'), '; export DTR_VERSION=', parameters('dtrVersion'), '; export DOCKER_VERSION=', parameters('dockerVersion'), '; export DOCKER_LINUX_VERSION=', parameters('dockerLinuxVersion'), '; export HUB_PASSWORD=', parameters('hubPassword'), '; export HUB_USERNAME=', parameters('hubUsername'), '; ./install-docker.sh; ./install-ucp-mgr.sh; ./install-dtr-mgr.sh;')]"
+            "commandToExecute": "[concat('export UCP_PUBLIC_FQDN=', variables('manager_sub0').ucpHostname, '; export DTR_PUBLIC_FQDN=', variables('manager_sub0').dtrHostname, '; export UCP_ADMIN_PASSWORD=', parameters('adminPassword'), '; export UCP_VERSION=', parameters('ucpVersion'), '; export DTR_VERSION=', parameters('dtrVersion'), '; export DOCKER_VERSION=', parameters('dockerVersion'), '; export DOCKER_LINUX_VERSION=', parameters('dockerLinuxVersion'), '; ./install-docker.sh; ./install-ucp-mgr.sh; ./install-dtr-mgr.sh;')]"
           }
         }
     },
@@ -899,7 +887,7 @@
           "fileUris": [
             "[concat(parameters('artifactBaseUri'), 'configure-worker.ps1')]"
           ],
-          "commandToExecute": "[concat('powershell.exe -ExecutionPolicy Unrestricted -File configure-worker.ps1 -DockerVersion ', parameters('dockerVersion'), ' -HubPassword ', parameters('hubPassword'), ' -HubUsername ', parameters('hubUsername'), ' -UcpVersion ', parameters('ucpVersion'), ' -DTRFQDN ', variables('manager_sub0').dtrHostname)]"
+          "commandToExecute": "[concat('powershell.exe -ExecutionPolicy Unrestricted -File configure-worker.ps1 -DockerVersion ', parameters('dockerVersion'), ' -UcpVersion ', parameters('ucpVersion'), ' -DTRFQDN ', variables('manager_sub0').dtrHostname)]"
         }
       }
     }
