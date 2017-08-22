@@ -1,6 +1,6 @@
 param(
     [Parameter(Mandatory=$true)]
-    [string]$region,
+    [string]$location,
     [Parameter(Mandatory=$true)]
     [string]$resourceGroupName,
     [Parameter(Mandatory=$true)]
@@ -10,7 +10,8 @@ param(
 
     [string]$ucpVersion='2.2.0',
     [string]$dtrVersion='2.3.0',
-    [string]$dockerVersion='17.06.0',
+    [string]$dockerVersion='17.06.1',    
+    [string]$dockerLinuxVersion='17.06.1~ee~1-0',
     [string]$vmSize='Standard_D2_v2',
     [string]$storageAccountType='Standard_LRS',
     [int]$workerCount=3
@@ -29,6 +30,7 @@ $parameters = @{
     'ucpVersion' = $ucpVersion; 
     'dtrVersion' = $dtrVersion; 
     'dockerVersion' = $dockerVersion;
+    'dockerLinuxVersion' = $dockerLinuxVersion;
     'vmSize' = $vmSize;
     'storageAccountType' = $storageAccountType;
 }
