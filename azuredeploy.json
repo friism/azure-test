@@ -53,13 +53,19 @@
     "dockerVersion": {
       "type": "string",
       "metadata": {
-        "description": "Docker Version"
+        "description": "Docker major & minor version, e.g. 17.06"
+      }
+    },
+    "dockerWindowsVersion": {
+      "type": "string",
+      "metadata": {
+        "description": "Docker full version for Windows, e.g. 17.06.1-ee-1"
       }
     },
     "dockerLinuxVersion": {
       "type": "string",
       "metadata": {
-        "description": "Docker Version"
+        "description": "Docker full version for Linux, e.g. 17.06.1~ee~1-0"
       }
     },
     "adminPassword": {
@@ -894,7 +900,7 @@
           "fileUris": [
             "[concat(parameters('artifactBaseUri'), 'configure-worker.ps1')]"
           ],
-          "commandToExecute": "[concat('powershell.exe -ExecutionPolicy Unrestricted -File configure-worker.ps1 -DockerVersion ', parameters('dockerVersion'), ' -UcpVersion ', parameters('ucpVersion'), ' -DTRFQDN ', variables('manager_sub0').dtrHostname)]"
+          "commandToExecute": "[concat('powershell.exe -ExecutionPolicy Unrestricted -File configure-worker.ps1 -DockerVersion ', parameters('dockerVersion'), ' -DockerWindowsVersion ', parameters('dockerWindowsVersion'), ' -UcpVersion ', parameters('ucpVersion'), ' -DTRFQDN ', variables('manager_sub0').dtrHostname)]"
         }
       }
     }

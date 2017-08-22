@@ -10,7 +10,8 @@ param(
 
     [string]$ucpVersion='2.2.0',
     [string]$dtrVersion='2.3.0',
-    [string]$dockerVersion='17.06.1',    
+    [string]$dockerVersion='17.06.1',        
+    [string]$dockerWindowsVersion='17.06.1-ee-1',    
     [string]$dockerLinuxVersion='17.06.1~ee~1-0',
     [string]$vmSize='Standard_D2_v2',
     [string]$storageAccountType='Standard_LRS',
@@ -30,6 +31,7 @@ $parameters = @{
     'ucpVersion' = $ucpVersion; 
     'dtrVersion' = $dtrVersion; 
     'dockerVersion' = $dockerVersion;
+    'dockerWindowsVersion' = $dockerWindowsVersion;
     'dockerLinuxVersion' = $dockerLinuxVersion;
     'vmSize' = $vmSize;
     'storageAccountType' = $storageAccountType;

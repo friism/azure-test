@@ -2,6 +2,7 @@
 Param(
   [switch] $SkipEngineUpgrade,
   [string] $DockerVersion,
+  [string] $DockerWindowsVersion,
   [string] $DTRFQDN,
   [string] $UcpVersion
 )
@@ -17,8 +18,7 @@ function Disable-RealTimeMonitoring () {
 }
 
 function Install-LatestDockerEngine () {
-    $dockerMajorMinorVersion = $DockerVersion.Substring(0, 5)
-    Invoke-WebRequest -Uri "https://download.docker.com/components/engine/windows-server/$dockerMajorMinorVersion/docker-$DockerVersion.zip" -OutFile "docker.zip"
+    Invoke-WebRequest -Uri "https://download.docker.com/components/engine/windows-server/$DockerVersion/docker-$DockerWindowsVersion.zip" -OutFile "docker.zip"
 
     Stop-Service docker
     Remove-Item -Force -Recurse $env:ProgramFiles\docker
