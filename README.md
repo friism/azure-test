@@ -31,7 +31,6 @@ This is an interactive script. You will be prompted for:
 - the prefix to use for resource names
 - your SSH public key for remote access to Linux nodes
 - administrator credentials to set
-- your Docker Hub credentials
 
 ## Setup
 

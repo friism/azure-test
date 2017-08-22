@@ -8,22 +8,19 @@ param(
     [Parameter(Mandatory=$true)]
     [string]$sshPublicKey,
 
-    [string]$ucpVersion='latest',
-    [string]$dtrVersion='2.3.0-tp6',
+    [string]$ucpVersion='2.2.0',
+    [string]$dtrVersion='2.3.0',
     [string]$dockerVersion='17.06.0',
     [string]$vmSize='Standard_D2_v2',
     [string]$storageAccountType='Standard_LRS',
-    [int]$workerCount=1
+    [int]$workerCount=3
 )
 
 New-AzureRmResourceGroup -Name $resourceGroupName -Location $location -Force
 
 $adminCredential = $Host.ui.PromptForCredential('DDC credentials', 'User name and password to set for the administrator', 'docker', '')
-$hubCredential = $Host.ui.PromptForCredential('Docker Hub credentials', 'User name and password for Docker Hub', '', '')
 
 $parameters = @{ 
-    'hubUsername'= $hubCredential.UserName; 
-    'hubPassword' = $hubCredential.GetNetworkCredential().password; 
     'workerCount' = $workerCount; 
     'prefix' = $resourcePrefix; 
     'adminUsername' = $adminCredential.UserName; 

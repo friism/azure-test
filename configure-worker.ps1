@@ -3,8 +3,6 @@ Param(
   [switch] $SkipEngineUpgrade,
   [string] $DockerVersion,
   [string] $DTRFQDN,
-  [string] $HubUsername,
-  [string] $HubPassword,
   [string] $UcpVersion
 )
 
@@ -19,8 +17,8 @@ function Disable-RealTimeMonitoring () {
 }
 
 function Install-LatestDockerEngine () {
-    #Get Docker Engine from Master Builds
-    Invoke-WebRequest -Uri "https://download.docker.com/win/static/test/x86_64/docker-$DockerVersion-ce.zip" -OutFile "docker.zip"
+    $dockerMajorMinorVersion = $DockerVersion.Substring(0, 5)
+    Invoke-WebRequest -Uri "https://download.docker.com/components/engine/windows-server/$dockerMajorMinorVersion/docker-$DockerVersion.zip" -OutFile "docker.zip"
 
     Stop-Service docker
     Remove-Item -Force -Recurse $env:ProgramFiles\docker
@@ -47,11 +45,10 @@ function Set-DtrHostnameEnvironmentVariable() {
 }
 
 function Get-UcpImages() {
-    docker login -p $HubPassword -u $HubUsername
-    docker pull dockerorcadev/ucp-dsinfo-win:$UcpVersion
-    docker pull dockerorcadev/ucp-agent-win:$UcpVersion
+    docker pull docker/ucp-dsinfo-win:$UcpVersion
+    docker pull docker/ucp-agent-win:$UcpVersion
 
-    Add-Content setup.ps1 $(docker run --rm dockerorcadev/ucp-agent-win:$UcpVersion windows-script --image-version dev:)
+    Add-Content setup.ps1 $(docker run --rm docker/ucp-agent-win:$UcpVersion windows-script)
     & .\setup.ps1
     Remove-Item -Force setup.ps1
 }
