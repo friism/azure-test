@@ -1,35 +1,36 @@
 # Credits
 
-Brandon Royal
+Brandon Royal, 
+Michael Friis
 
 # Instructions
+
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsixeyed%2Fazure-test%2Fmaster%2Fazuredeploy.json" target="_blank">
+    <img src="http://azuredeploy.net/deploybutton.png"/>
+</a>
+<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Fsixeyed%2Fazure-test%2Fmaster%2Fazuredeploy.json" target="_blank">
+    <img src="http://armviz.io/visualizebutton.png"/>
+</a>
 
 ## Installation with PowerShell
 
 ```
-Login-AzureRmAccount
-
 git clone https://github.com/friism/azure-test
 
 cd azure-test
 
-$resource_group_name="<some-resource-group-you-pre-created>"
+Login-AzureRmAccount
 
-$adminPassword="<some-pw-with-special-char-and-capital-letters>"
-$sshPublicKey="<your-pup-key>"
-$prefix="<some-prefix-less-than-7-chars>"
-$ucpVersion="latest"
-$dtrVersion="2.3.0-tp6"
-$dockerVersion="17.06.0-ce"
-$workerCount=1
-
-$parameters = @{ 'workerCount' = $workerCount; 'prefix' = $prefix; 'adminUsername' = "docker"; 'adminPassword' = $adminPassword; 'sshPublicKey' = $sshPublicKey; 'ucpVersion' = $ucpVersion; 'dtrVersion' = $dtrVersion; 'dockerVersion' = $dockerVersion }
-
-New-AzureRmResourceGroupDeployment -ResourceGroupName $resource_group_name `
-  -TemplateUri 'https://raw.githubusercontent.com/friism/azure-test/master/azuredeploy.json' `
-  -TemplateParameterObject $parameters `
-  -Verbose
+.\deploy.ps1
 ```
+
+This is an interactive script. You will be prompted for:
+
+- the Azure region where resources will be created
+- the resource group name (RG will be created if it does not exist)
+- the prefix to use for resource names
+- your SSH public key for remote access to Linux nodes
+- administrator credentials to set
 
 ## Setup
 

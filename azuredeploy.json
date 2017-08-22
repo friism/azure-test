@@ -53,13 +53,19 @@
     "dockerVersion": {
       "type": "string",
       "metadata": {
-        "description": "Docker Version"
+        "description": "Docker major & minor version, e.g. 17.06"
+      }
+    },
+    "dockerWindowsVersion": {
+      "type": "string",
+      "metadata": {
+        "description": "Docker full version for Windows, e.g. 17.06.1-ee-1"
       }
     },
     "dockerLinuxVersion": {
       "type": "string",
       "metadata": {
-        "description": "Docker Version"
+        "description": "Docker full version for Linux, e.g. 17.06.1~ee~1-0"
       }
     },
     "adminPassword": {
@@ -85,7 +91,7 @@
       "type": "int",
       "defaultValue": 1,
       "metadata": {
-        "description": "Number of worker nodes"
+        "description": "Number of manager nodes"
       }
     },
     "workerCount": {
@@ -116,7 +122,14 @@
     },
     "artifactBaseUri": {
       "type": "string",
-      "defaultValue": "https://raw.githubusercontent.com/friism/azure-test/master/" 
+      "defaultValue": "https://raw.githubusercontent.com/sixeyed/azure-test/master/" 
+    },
+    "storageAccountType": {
+      "type": "string",
+      "defaultValue": "Premium_LRS",
+      "metadata": {
+        "description": "Type of storage account"
+      }
     }
   },
   "variables": {
@@ -180,7 +193,7 @@
       "lbProbe8082ID": "[concat(variables('worker_sub0').lbID,'/probes/tcp8082Probe')]"
     },
     "storageAccountName": "[concat(variables('prefix'),uniqueString(concat(resourceGroup().id, '0')))]",
-    "storageAccountType": "Premium_LRS",
+    "storageAccountType": "[parameters('storageAccountType')]",
     "storageDomainSuffix": "[concat('.', parameters('storageDomain'))]",
     "addressPrefix": "10.0.0.0/16",
     "subnetName": "Subnet",
@@ -887,7 +900,7 @@
           "fileUris": [
             "[concat(parameters('artifactBaseUri'), 'configure-worker.ps1')]"
           ],
-          "commandToExecute": "[concat('powershell.exe -ExecutionPolicy Unrestricted -File configure-worker.ps1 -DockerVersion ', parameters('dockerVersion'), ' -UcpVersion ', parameters('ucpVersion'), ' -DTRFQDN ', variables('manager_sub0').dtrHostname)]"
+          "commandToExecute": "[concat('powershell.exe -ExecutionPolicy Unrestricted -File configure-worker.ps1 -DockerVersion ', parameters('dockerVersion'), ' -DockerWindowsVersion ', parameters('dockerWindowsVersion'), ' -UcpVersion ', parameters('ucpVersion'), ' -DTRFQDN ', variables('manager_sub0').dtrHostname)]"
         }
       }
     }
